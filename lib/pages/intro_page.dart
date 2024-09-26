@@ -37,6 +37,7 @@ class IntroPage extends StatelessWidget {
           Text(
             "Fresh every day",
             style: TextStyle(
+              fontSize: 18,
               color: Colors.grey[600],
             ),
           ),
@@ -60,6 +61,7 @@ class IntroPage extends StatelessWidget {
                 child: const Text(
                   "Get Started",
                   style: TextStyle(
+                    fontSize: 16,
                     color: Colors.white,
                   ),
                 )),

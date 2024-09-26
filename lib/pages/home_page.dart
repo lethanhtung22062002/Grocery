@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return const CartPage();
+              return CartPage();
             },
           ),
         ),

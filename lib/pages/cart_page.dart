@@ -29,12 +29,13 @@ class CartPage extends StatelessWidget {
                   ),
                 ),
               ),
-              // list of cart items
+              // List of cart items
               Expanded(
                 child: ListView.builder(
                   itemCount: value.cartItems.length,
                   padding: const EdgeInsets.all(12),
                   itemBuilder: (context, index) {
+                    final cartItem = value.cartItems[index];
                     return Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Container(
@@ -44,11 +45,11 @@ class CartPage extends StatelessWidget {
                         ),
                         child: ListTile(
                           leading: Image.asset(
-                            value.cartItems[index][2],
+                            cartItem[2],
                             height: 36,
                           ),
-                          title: Text(value.cartItems[index][0]),
-                          subtitle: Text('\$' + value.cartItems[index][1]),
+                          title: Text(cartItem[0]),
+                          subtitle: Text('\$' + cartItem[1]),
                           trailing: IconButton(
                             icon: const Icon(Icons.cancel),
                             onPressed: () =>
@@ -62,7 +63,7 @@ class CartPage extends StatelessWidget {
                 ),
               ),
 
-              // total price + pay now
+              // Total price + pay now
               Padding(
                 padding: const EdgeInsets.all(36.0),
                 child: Container(
@@ -74,7 +75,7 @@ class CartPage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // price
+                      // Price
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -82,11 +83,9 @@ class CartPage extends StatelessWidget {
                             "Total Price",
                             style: TextStyle(color: Colors.green[100]),
                           ),
-                          const SizedBox(
-                            height: 4,
-                          ),
+                          const SizedBox(height: 4),
                           Text(
-                            '\$${value.calculateTotal()}',
+                            '\$' + value.calculateTotal(),
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18,
@@ -95,7 +94,7 @@ class CartPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      // pay now button
+                      // Pay now button
                       Container(
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.green.shade100),

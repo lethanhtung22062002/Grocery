@@ -1,42 +1,47 @@
 import 'package:flutter/material.dart';
 
-class CartModel extends ChangeNotifier {
-  // list of items on sale
+class CartModel with ChangeNotifier {
+  // List of items on sale
   final List _shopItems = [
-    // [ itemName, itemPrice, imagePath, color ]
     ["Avocado", "4.00", "assets/images/avocado.png", Colors.green],
     ["Banana", "2.50", "assets/images/banana.png", Colors.yellow],
     ["Chicken", "12.80", "assets/images/chicken.png", Colors.brown],
     ["Water", "1.00", "assets/images/water.png", Colors.blue],
   ];
 
-  // list of cart items
+  // List of cart items
   final List _cartItems = [];
 
-  get shopItems => _shopItems;
+  List get shopItems => _shopItems;
 
-  get cartItems => _cartItems;
+  List get cartItems => _cartItems;
 
-  // add item to cart
+  // Add item to cart
   void addToCart(item) {
     _cartItems.add(item);
     notifyListeners();
   }
 
-  // remove item from cart
+  // Remove item from cart by item reference
   void removeFromCart(item) {
     _cartItems.remove(item);
     notifyListeners();
   }
 
-  // calculate total price
+  // Remove item from cart by index
+  void removeItemFromCart(int index) {
+    if (index >= 0 && index < _cartItems.length) {
+      _cartItems.removeAt(index);
+      notifyListeners();
+    }
+  }
+
+  // Calculate total price
   String calculateTotal() {
     double totalPrice = 0;
-    for (int i = 0; i < _cartItems.length; i++) {
-      totalPrice += double.parse(_cartItems[i][1]);
+    for (var item in _cartItems) {
+      totalPrice += double.parse(item[1]);
     }
     return totalPrice.toStringAsFixed(2);
   }
-
-  removeItemFromCart(int index) {}
 }

@@ -29,12 +29,14 @@ class CartPage extends StatelessWidget {
                   ),
                 ),
               ),
-              // List of cart items
               Expanded(
                 child: ListView.builder(
                   itemCount: value.cartItems.length,
                   padding: const EdgeInsets.all(12),
                   itemBuilder: (context, index) {
+                    if (index < 0 || index >= value.cartItems.length) {
+                      return Container(); // Handle unexpected index
+                    }
                     final cartItem = value.cartItems[index];
                     return Padding(
                       padding: const EdgeInsets.all(12.0),
@@ -52,9 +54,7 @@ class CartPage extends StatelessWidget {
                           subtitle: Text('\$' + cartItem[1]),
                           trailing: IconButton(
                             icon: const Icon(Icons.cancel),
-                            onPressed: () =>
-                                Provider.of<CartModel>(context, listen: false)
-                                    .removeItemFromCart(index),
+                            onPressed: () => value.removeItemFromCart(index),
                           ),
                         ),
                       ),
@@ -62,8 +62,6 @@ class CartPage extends StatelessWidget {
                   },
                 ),
               ),
-
-              // Total price + pay now
               Padding(
                 padding: const EdgeInsets.all(36.0),
                 child: Container(
@@ -75,7 +73,6 @@ class CartPage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // Price
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -94,7 +91,6 @@ class CartPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      // Pay now button
                       Container(
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.green.shade100),

@@ -5,13 +5,15 @@ class GroceryItemTile extends StatelessWidget {
   final String itemPrice;
   final String itemPath;
   final color;
+  void Function()? onPressed;
 
-  const GroceryItemTile({
+  GroceryItemTile({
     super.key,
     required this.itemName,
     required this.itemPrice,
     required this.itemPath,
     required this.color,
+    required this.onPressed,
   });
 
   @override
@@ -19,6 +21,7 @@ class GroceryItemTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: Container(
+          padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             color: color[100],
             borderRadius: BorderRadius.circular(12),
@@ -35,10 +38,10 @@ class GroceryItemTile extends StatelessWidget {
               Text(itemName),
               // price + button
               MaterialButton(
-                onPressed: () {},
+                onPressed: onPressed,
                 color: color[800],
                 child: Text(
-                  '\$' + itemPrice,
+                  '\$$itemPrice',
                   style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
